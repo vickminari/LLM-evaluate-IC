@@ -1,0 +1,24 @@
+# GovBench-BR: Project Dependencies
+
+# LLM Providers, APIs & Infrastructure
+litellm>=1.90.0
+openai>=1.30.0
+ollama>=0.2.0
+python-dotenv>=1.0.0
+requests>=2.31.0
+
+# Machine Learning, NLP & Fine-Tuning
+torch>=2.2.0    # usar o torch via link com cuda
+transformers>=4.40.0
+peft>=0.10.0
+datasets>=2.18.0
+scikit-learn>=1.5.0
+numpy>=1.26.0
+
+# Data Utilities & Serialization
+pydantic>=2.7.0
+tqdm>=4.66.0
+
+# Optional Visualization & Analysis
+matplotlib>=3.8.0
+pandas>=2.2.0
