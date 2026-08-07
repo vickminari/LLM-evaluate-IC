@@ -1,0 +1,58 @@
+{
+  "quality_counts": {
+    "ok": 7619,
+    "revoked_or_vetoed": 20,
+    "fragmented_table": 414,
+    "too_short": 151
+  },
+  "domains": {
+    "legislacao": {
+      "qa_target": 150,
+      "tasks_generated": {
+        "factual": 75,
+        "conceitual": 69,
+        "aplicado": 63
+      },
+      "pool_ok_chunks": 1037,
+      "pool_total_chunks": 1054,
+      "source_documents_covered": 3,
+      "source_documents_available": 3
+    },
+    "saude": {
+      "qa_target": 120,
+      "tasks_generated": {
+        "factual": 60,
+        "conceitual": 57,
+        "aplicado": 51
+      },
+      "pool_ok_chunks": 5791,
+      "pool_total_chunks": 6238,
+      "source_documents_covered": 101,
+      "source_documents_available": 131
+    },
+    "edu": {
+      "qa_target": 120,
+      "tasks_generated": {
+        "factual": 54,
+        "conceitual": 56,
+        "aplicado": 51
+      },
+      "pool_ok_chunks": 423,
+      "pool_total_chunks": 425,
+      "source_documents_covered": 3,
+      "source_documents_available": 3
+    },
+    "seguranca": {
+      "qa_target": 150,
+      "tasks_generated": {
+        "factual": 76,
+        "conceitual": 52,
+        "aplicado": 63
+      },
+      "pool_ok_chunks": 368,
+      "pool_total_chunks": 487,
+      "source_documents_covered": 2,
+      "source_documents_available": 2
+    }
+  }
+}
