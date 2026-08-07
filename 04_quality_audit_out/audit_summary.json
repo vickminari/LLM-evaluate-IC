@@ -1,0 +1,73 @@
+{
+  "total_itens": 901,
+  "itens_sinalizados": 77,
+  "pct_sinalizados": 8.5,
+  "contagem_por_flag": {
+    "low_lexical_grounding": 75,
+    "near_duplicate_question": 2
+  },
+  "pares_quase_duplicados": 1,
+  "tamanho_total_amostra_revisao": 434,
+  "plano_amostral_por_estrato": {
+    "edu__aplicado": {
+      "N": 70,
+      "amostra_recomendada": 35,
+      "sinalizados": 0
+    },
+    "edu__conceitual": {
+      "N": 77,
+      "amostra_recomendada": 37,
+      "sinalizados": 12
+    },
+    "edu__factual": {
+      "N": 70,
+      "amostra_recomendada": 35,
+      "sinalizados": 0
+    },
+    "legislacao__aplicado": {
+      "N": 85,
+      "amostra_recomendada": 38,
+      "sinalizados": 0
+    },
+    "legislacao__conceitual": {
+      "N": 100,
+      "amostra_recomendada": 41,
+      "sinalizados": 29
+    },
+    "legislacao__factual": {
+      "N": 61,
+      "amostra_recomendada": 33,
+      "sinalizados": 0
+    },
+    "saude__aplicado": {
+      "N": 65,
+      "amostra_recomendada": 34,
+      "sinalizados": 0
+    },
+    "saude__conceitual": {
+      "N": 76,
+      "amostra_recomendada": 37,
+      "sinalizados": 4
+    },
+    "saude__factual": {
+      "N": 77,
+      "amostra_recomendada": 37,
+      "sinalizados": 1
+    },
+    "seguranca__aplicado": {
+      "N": 71,
+      "amostra_recomendada": 35,
+      "sinalizados": 9
+    },
+    "seguranca__conceitual": {
+      "N": 63,
+      "amostra_recomendada": 33,
+      "sinalizados": 15
+    },
+    "seguranca__factual": {
+      "N": 86,
+      "amostra_recomendada": 39,
+      "sinalizados": 7
+    }
+  }
+}
