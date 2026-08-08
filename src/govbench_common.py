@@ -101,7 +101,7 @@ def extract_json(text: str) -> dict:
 # --------------------------------------------------------------------------
 # LLM-AS-JUDGE (auditoria independente dos pares QA já gerados)
 # --------------------------------------------------------------------------
- 
+
 JUDGE_SYSTEM_PROMPT = (
     "Você é um auditor independente e rigoroso de um benchmark de perguntas e "
     "respostas sobre documentos oficiais brasileiros (GovBench-BR). Você NÃO "
@@ -110,11 +110,10 @@ JUDGE_SYSTEM_PROMPT = (
     "CRITÉRIOS DE AVALIAÇÃO:\n"
     "1. fundamentado_no_trecho: a resposta de referência pode ser INTEIRAMENTE "
     "derivada do(s) trecho(s) fornecido(s), sem precisar de nenhum fato externo?\n"
-    "2. informacao_extra_nao_presente: a resposta contém algum fato, número, "
-    "nome de lei ou detalhe que NÃO aparece literalmente no(s) trecho(s) "
-    "fornecido(s) -- mesmo que esse fato seja verdadeiro no mundo real? "
-    "(isso é um problema mesmo se a informação estiver correta, porque quebra "
-    "a garantia de que a resposta é rastreável à fonte)\n"
+    "2. informacao_extra_nao_presente: a resposta contém algum fato, número "
+    "ou detalhe factual que NÃO aparece no(s) trecho(s) fornecido(s)? "
+    "(Nota: A citação do nome oficial do documento/lei/norma fornecido no cabeçalho "
+    "do trecho NÃO é considerada informação extra externa).\n"
     "3. nivel_dificuldade_adequado: a complexidade da pergunta é compatível "
     "com o nível declarado (factual = extração direta; conceitual = "
     "explicação/definição; aplicado = exige combinar TODOS os trechos "
@@ -135,15 +134,20 @@ JUDGE_SYSTEM_PROMPT = (
     "fundamentado_no_trecho=false; 'revisar' se algum outro critério falhar; "
     "'aprovado' só se os 4 critérios passarem."
 )
- 
- 
+
+
 def build_judge_prompt(item: dict) -> str:
+    fontes = item.get("fontes", [])
+    fontes_str = f" | Fonte(s) Oficial(is): {', '.join(fontes)}" if fontes else ""
     parts = [
         f"Nível de dificuldade declarado: {item['nivel_dificuldade'].upper()}",
         "",
     ]
-    for i, ct in enumerate(item["chunk_texto"], start=1):
-        parts.append(f"--- Trecho {i} ---")
+    chunk_textos = item.get("chunk_texto", [])
+    if isinstance(chunk_textos, str):
+        chunk_textos = [chunk_textos]
+    for i, ct in enumerate(chunk_textos, start=1):
+        parts.append(f"--- Trecho {i}{fontes_str} ---")
         parts.append(ct)
         parts.append("")
     parts.append(f"PERGUNTA: {item['pergunta']}")
