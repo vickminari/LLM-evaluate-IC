@@ -1,13 +1,15 @@
 {
-  "total_itens": 901,
-  "itens_sinalizados": 77,
-  "pct_sinalizados": 8.5,
+  "total_itens": 848,
+  "itens_sinalizados": 56,
+  "pct_sinalizados": 6.6,
   "contagem_por_flag": {
-    "low_lexical_grounding": 75,
+    "low_lexical_grounding": 50,
+    "aplicado_single_source_reliance": 3,
+    "reference_list_source": 4,
     "near_duplicate_question": 2
   },
   "pares_quase_duplicados": 1,
-  "tamanho_total_amostra_revisao": 434,
+  "tamanho_total_amostra_revisao": 420,
   "plano_amostral_por_estrato": {
     "edu__aplicado": {
       "N": 70,
@@ -42,11 +44,11 @@
     "saude__aplicado": {
       "N": 65,
       "amostra_recomendada": 34,
-      "sinalizados": 0
+      "sinalizados": 2
     },
     "saude__conceitual": {
-      "N": 76,
-      "amostra_recomendada": 37,
+      "N": 75,
+      "amostra_recomendada": 36,
       "sinalizados": 4
     },
     "saude__factual": {
@@ -55,19 +57,19 @@
       "sinalizados": 1
     },
     "seguranca__aplicado": {
-      "N": 71,
-      "amostra_recomendada": 35,
-      "sinalizados": 9
+      "N": 51,
+      "amostra_recomendada": 30,
+      "sinalizados": 1
     },
     "seguranca__conceitual": {
-      "N": 63,
-      "amostra_recomendada": 33,
-      "sinalizados": 15
+      "N": 48,
+      "amostra_recomendada": 29,
+      "sinalizados": 4
     },
     "seguranca__factual": {
-      "N": 86,
-      "amostra_recomendada": 39,
-      "sinalizados": 7
+      "N": 69,
+      "amostra_recomendada": 35,
+      "sinalizados": 3
     }
   }
 }
