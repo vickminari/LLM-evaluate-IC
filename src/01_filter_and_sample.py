@@ -121,6 +121,10 @@ def classify_quality(chunk: dict) -> str:
     if n_lines >= 4 and words_per_line < 4:
         return "fragmented_table"
 
+    TABLE_HEADER_PATTERN = re.compile(r"^\s*(Tabela|Quadro|Gráfico|Grafico|Figura)\s*\d+(\.\d+)?", re.IGNORECASE)
+    if word_count < 40 and ("Tabela" in content or "Fonte:" in content or "Sumário" in content or "CID" in content or "TABELA" in content or TABLE_HEADER_PATTERN.search(content)):
+        return "table_artifact_or_short"
+
     return "ok"
 
 

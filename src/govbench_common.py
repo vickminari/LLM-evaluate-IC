@@ -70,9 +70,16 @@ OUTPUT_SCHEMA_INSTRUCTIONS = (
 )
 
 
+REGRA_ANTI_TABELA = (
+    "ATENÇÃO OBRIGATÓRIA: É ESTREITAMENTE PROIBIDO mencionar números de tabelas, "
+    "quadros, gráficos ou figuras no enunciado da pergunta ou na resposta (ex: 'Tabela 5.1', "
+    "'Quadro 3.2'). Formule a pergunta focando estritamente nos conceitos, normas, análises ou "
+    "diretrizes de políticas públicas explicados no texto."
+)
+
 def build_prompt(task: dict) -> str:
     chunks = task["chunks"]
-    parts = [INSTRUCOES_POR_NIVEL[task["nivel_dificuldade"]], ""]
+    parts = [INSTRUCOES_POR_NIVEL[task["nivel_dificuldade"]], REGRA_ANTI_TABELA, ""]
     for i, c in enumerate(chunks, start=1):
         label = c.get("article_ref") or c.get("section_title") or c["chunk_id"]
         parts.append(f"--- Trecho {i} (fonte: {c['source_document']} | {label}) ---")
