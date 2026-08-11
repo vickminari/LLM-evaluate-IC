@@ -1,9 +1,10 @@
 {
   "quality_counts": {
-    "ok": 7619,
+    "ok": 7604,
     "revoked_or_vetoed": 20,
     "fragmented_table": 414,
-    "too_short": 151
+    "too_short": 151,
+    "table_artifact_or_short": 15
   },
   "domains": {
     "legislacao": {
@@ -25,9 +26,9 @@
         "conceitual": 57,
         "aplicado": 51
       },
-      "pool_ok_chunks": 5791,
+      "pool_ok_chunks": 5783,
       "pool_total_chunks": 6238,
-      "source_documents_covered": 101,
+      "source_documents_covered": 100,
       "source_documents_available": 131
     },
     "edu": {
@@ -49,7 +50,7 @@
         "conceitual": 52,
         "aplicado": 63
       },
-      "pool_ok_chunks": 368,
+      "pool_ok_chunks": 361,
       "pool_total_chunks": 487,
       "source_documents_covered": 2,
       "source_documents_available": 2
