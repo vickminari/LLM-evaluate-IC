@@ -38,12 +38,17 @@ validação humana obrigatória (seção 3.3.1) antes de virar o dataset final.
 import argparse
 import json
 import time
+import threading
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from dotenv import load_dotenv
 load_dotenv()  # Carrega as variáveis do arquivo .env automaticamente
 
-from src.govbench_common import call_model
+try:
+    from govbench_common import call_model
+except ModuleNotFoundError:
+    from src.govbench_common import call_model
 
 
 def load_jsonl(path: Path) -> list:
@@ -68,6 +73,7 @@ def main():
     parser.add_argument("--nivel", default=None, help="filtro opcional, ex.: factual,conceitual,aplicado")
     parser.add_argument("--limit", type=int, default=None, help="processa no máximo N tarefas nesta execução")
     parser.add_argument("--sleep", type=float, default=0.0, help="pausa (s) entre chamadas, para respeitar rate limit de API")
+    parser.add_argument("--workers", type=int, default=5, help="número de threads paralelas (padrão: 5)")
     args = parser.parse_args()
 
     output_path = Path(args.output)
@@ -75,19 +81,23 @@ def main():
     failures_path = Path(args.failures) if args.failures else output_path.with_suffix(".failures.jsonl")
 
     all_tasks = load_jsonl(Path(args.tasks))
+    already_done = set()
+    if output_path.exists():
+        with open(output_path, encoding="utf-8") as f:
+            for line in f:
+                line = line.strip()
+                if line:
+                    item = json.loads(line)
+                    already_done.add(item["id"])
+
+    pending = [t for t in all_tasks if t["task_id"] not in already_done]
 
     if args.dominio:
         domains = set(d.strip() for d in args.dominio.split(","))
-        all_tasks = [t for t in all_tasks if t["domain"] in domains]
+        pending = [t for t in pending if t["domain"] in domains]
     if args.nivel:
-        niveis = set(n.strip() for n in args.nivel.split(","))
-        all_tasks = [t for t in all_tasks if t["nivel_dificuldade"] in niveis]
-
-    # --- retomabilidade: pula tarefas já concluídas com sucesso no arquivo de saída ---
-    existing = load_jsonl(output_path)
-    already_done = {row["id"] for row in existing}
-    pending = [t for t in all_tasks if t["task_id"] not in already_done]
-
+        nivs = set(args.nivel.split(","))
+        pending = [t for t in pending if t["nivel_dificuldade"] in nivs]
     if args.limit:
         pending = pending[: args.limit]
 
@@ -96,52 +106,58 @@ def main():
     print(f"A processar nesta execução:    {len(pending)}")
     print(f"Modelo: {args.model}")
     print(f"Saída:  {output_path}")
-    print(f"Falhas: {failures_path}\n")
+    print(f"Falhas: {failures_path}")
+    print(f"Workers paralelos: {args.workers}\n")
 
     n_ok, n_fail = 0, 0
     failures_this_run = []
+    lock = threading.Lock()
 
-    # abre em modo append: escreve incrementalmente, cada linha já persistida
+    def process_task(task_tuple):
+        idx, task = task_tuple
+        r = call_model(args.model, task)
+        if args.sleep:
+            time.sleep(args.sleep)
+        return idx, task, r
+
     with open(output_path, "a", encoding="utf-8") as out_f:
-        for i, task in enumerate(pending, start=1):
-            r = call_model(args.model, task)
+        with ThreadPoolExecutor(max_workers=args.workers) as executor:
+            task_tuples = [(i, t) for i, t in enumerate(pending, start=1)]
+            for idx, task, r in executor.map(process_task, task_tuples):
+                with lock:
+                    if r["parse_ok"]:
+                        row = {
+                            "id": task["task_id"],
+                            "dominio": task["domain"],
+                            "nivel_dificuldade": task["nivel_dificuldade"],
+                            "group_type": task["group_type"],
+                            "fontes": [c["source_document"] for c in task["chunks"]],
+                            "chunk_ids": [c["chunk_id"] for c in task["chunks"]],
+                            "chunk_texto": [c["content"] for c in task["chunks"]],
+                            "pergunta": r["pergunta"],
+                            "resposta_referencia": r["resposta_referencia"],
+                            "trechos_usados": r["trechos_usados"],
+                            "gerado_por": args.model,
+                            "validado_por": None,
+                            "validado": False,
+                        }
+                        out_f.write(json.dumps(row, ensure_ascii=False) + "\n")
+                        out_f.flush()
+                        n_ok += 1
+                        status = "OK"
+                    else:
+                        failures_this_run.append({
+                            "task_id": task["task_id"],
+                            "domain": task["domain"],
+                            "nivel_dificuldade": task["nivel_dificuldade"],
+                            "model": args.model,
+                            "error": r["error"],
+                            "raw_response": r["raw_response"],
+                        })
+                        n_fail += 1
+                        status = f"FALHOU ({(r['error'] or 'parse')[:60]})"
 
-            if r["parse_ok"]:
-                row = {
-                    "id": task["task_id"],
-                    "dominio": task["domain"],
-                    "nivel_dificuldade": task["nivel_dificuldade"],
-                    "group_type": task["group_type"],
-                    "fontes": [c["source_document"] for c in task["chunks"]],
-                    "chunk_ids": [c["chunk_id"] for c in task["chunks"]],
-                    "chunk_texto": [c["content"] for c in task["chunks"]],
-                    "pergunta": r["pergunta"],
-                    "resposta_referencia": r["resposta_referencia"],
-                    "trechos_usados": r["trechos_usados"],
-                    "gerado_por": args.model,
-                    "validado_por": None,
-                    "validado": False,
-                }
-                out_f.write(json.dumps(row, ensure_ascii=False) + "\n")
-                out_f.flush()
-                n_ok += 1
-                status = "OK"
-            else:
-                failures_this_run.append({
-                    "task_id": task["task_id"],
-                    "domain": task["domain"],
-                    "nivel_dificuldade": task["nivel_dificuldade"],
-                    "model": args.model,
-                    "error": r["error"],
-                    "raw_response": r["raw_response"],
-                })
-                n_fail += 1
-                status = f"FALHOU ({(r['error'] or 'parse')[:60]})"
-
-            print(f"  [{i}/{len(pending)}] {task['task_id']} ({task['nivel_dificuldade']}) -> {status}")
-
-            if args.sleep:
-                time.sleep(args.sleep)
+                    print(f"  [{n_ok + n_fail}/{len(pending)}] {task['task_id']} ({task['nivel_dificuldade']}) -> {status}")
 
     if failures_this_run:
         with open(failures_path, "w", encoding="utf-8") as f:
