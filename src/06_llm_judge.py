@@ -32,7 +32,7 @@ import json
 from collections import Counter, defaultdict
 from pathlib import Path
 
-from src.govbench_common import call_judge
+from govbench_common import call_judge
 
 
 def load_jsonl(path: Path) -> list:
