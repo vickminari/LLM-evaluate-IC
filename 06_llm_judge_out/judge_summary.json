@@ -1,9 +1,9 @@
 {
-  "total_itens": 901,
+  "total_itens": 88,
   "distribuicao_veredito_geral": {
-    "aprovado": 1705,
-    "rejeitar": 76
+    "aprovado": 175,
+    "rejeitar": 1
   },
-  "itens_para_revisao_prioritaria": 70,
-  "taxa_concordancia_entre_juizes": 0.928
+  "itens_para_revisao_prioritaria": 1,
+  "taxa_concordancia_entre_juizes": 0.989
 }
