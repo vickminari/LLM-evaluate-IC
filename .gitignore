@@ -3,3 +3,6 @@ pilot_out/
 __pycache__
 data/
 report.md
+venv*
+.venv*
+unsloth*
