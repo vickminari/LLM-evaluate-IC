@@ -1,0 +1,18 @@
+% --- Tabela LaTeX: Desempenho Geral no GovBench-BR ---
+\begin{table*}[t]
+\centering
+\small
+\begin{tabular}{lcccccc}
+\toprule
+\textbf{Modelo} & \textbf{ROUGE-L} & \textbf{Token-F1} & \textbf{BERTScore} & \textbf{Phi-4 (1-5)} & \textbf{Cmd-R (1-5)} & \textbf{Aluc. (\%)} \\
+\midrule
+\textbf{Qwen 3.5 (FT)}$^\star$ & 0.3499 & 0.3948 & 0.6891 & 1.60 & 2.50 & 88.0\% \\
+Mistral-Nemo 12B & 0.2130 & 0.2645 & 0.6401 & 1.59 & 2.92 & 89.7\% \\
+Llama 3.1 8B & 0.1813 & 0.2215 & 0.5734 & 1.28 & 2.39 & 93.3\% \\
+DeepSeek-R1 8B & 0.1703 & 0.2008 & 0.5903 & 1.39 & 3.08 & 92.7\% \\
+Qwen 3.5 (Base) & 0.1218 & 0.1479 & 0.5869 & 1.53 & 3.88 & 87.1\% \\
+\bottomrule
+\end{tabular}
+\caption{Desempenho comparativo dos modelos avaliados no \textsc{GovBench-BR}. $^\star$Indica o modelo submetido ao fine-tuning LoRA no benchmark.}
+\label{tab:govbench_overall_results}
+\end{table*}

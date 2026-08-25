@@ -1,0 +1,6 @@
+﻿model_id,model_name,rouge_l,token_f1,bertscore_f1,judge_phi4_score,judge_cmdr_score,hallucination_rate_phi4,avg_latency_s,both_judges_agreed_correct,both_judges_agreed_incorrect,judges_disagreed
+qwen_finetuned,Qwen 3.5 9B (Fine-Tuned LoRA),0.3499,0.3948,0.6891,1.6,2.5,0.88,18.846607142857142,19,118,31
+ollama/mistral-nemo:12b,Mistral-Nemo (12B),0.213,0.2645,0.6401,1.59,2.92,0.897,17.46333333333333,15,89,64
+ollama/llama3.1:8b,Llama 3.1 (8B),0.1813,0.2215,0.5734,1.28,2.39,0.933,8.083214285714286,9,122,37
+ollama/deepseek-r1:8b,DeepSeek-R1 (8B),0.1703,0.2008,0.5903,1.39,3.08,0.927,24.965238095238096,13,85,70
+qwen_base,Qwen 3.5 9B (Base),0.1218,0.1479,0.5869,1.53,3.88,0.871,67.7347619047619,20,50,98
