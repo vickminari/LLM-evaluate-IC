@@ -1,0 +1,67 @@
+{
+  "ollama/llama3.1:8b": {
+    "n_itens": 168,
+    "rouge_l_medio": 0.1813,
+    "token_f1_medio": 0.2215,
+    "bertscore_f1_medio": 0.5734,
+    "taxa_bertscore_janelado": 0.012,
+    "nota_media_ollama/command-r7b": 2.39,
+    "taxa_alucinacao_ollama/command-r7b": 0.665,
+    "nota_media_ollama/phi4:14b": 1.28,
+    "taxa_alucinacao_ollama/phi4:14b": 0.933,
+    "taxa_resposta_vazia": 0.0,
+    "n_predicoes_totais": 168
+  },
+  "ollama/mistral-nemo:12b": {
+    "n_itens": 168,
+    "rouge_l_medio": 0.213,
+    "token_f1_medio": 0.2645,
+    "bertscore_f1_medio": 0.6401,
+    "taxa_bertscore_janelado": 0.054,
+    "nota_media_ollama/command-r7b": 2.92,
+    "taxa_alucinacao_ollama/command-r7b": 0.521,
+    "nota_media_ollama/phi4:14b": 1.59,
+    "taxa_alucinacao_ollama/phi4:14b": 0.897,
+    "taxa_resposta_vazia": 0.0,
+    "n_predicoes_totais": 168
+  },
+  "ollama/deepseek-r1:8b": {
+    "n_itens": 168,
+    "rouge_l_medio": 0.1703,
+    "token_f1_medio": 0.2008,
+    "bertscore_f1_medio": 0.5903,
+    "taxa_bertscore_janelado": 0.429,
+    "nota_media_ollama/command-r7b": 3.08,
+    "taxa_alucinacao_ollama/command-r7b": 0.482,
+    "nota_media_ollama/phi4:14b": 1.39,
+    "taxa_alucinacao_ollama/phi4:14b": 0.927,
+    "taxa_resposta_vazia": 0.0,
+    "n_predicoes_totais": 168
+  },
+  "qwen_base": {
+    "n_itens": 168,
+    "rouge_l_medio": 0.1218,
+    "token_f1_medio": 0.1479,
+    "bertscore_f1_medio": 0.5869,
+    "taxa_bertscore_janelado": 0.768,
+    "nota_media_ollama/command-r7b": 3.88,
+    "taxa_alucinacao_ollama/command-r7b": 0.244,
+    "nota_media_ollama/phi4:14b": 1.53,
+    "taxa_alucinacao_ollama/phi4:14b": 0.871,
+    "taxa_resposta_vazia": 0.0,
+    "n_predicoes_totais": 168
+  },
+  "qwen_finetuned": {
+    "n_itens": 168,
+    "rouge_l_medio": 0.3499,
+    "token_f1_medio": 0.3948,
+    "bertscore_f1_medio": 0.6891,
+    "taxa_bertscore_janelado": 0.036,
+    "nota_media_ollama/command-r7b": 2.5,
+    "taxa_alucinacao_ollama/command-r7b": 0.691,
+    "nota_media_ollama/phi4:14b": 1.6,
+    "taxa_alucinacao_ollama/phi4:14b": 0.88,
+    "taxa_resposta_vazia": 0.0,
+    "n_predicoes_totais": 168
+  }
+}
