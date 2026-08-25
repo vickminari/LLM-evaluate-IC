@@ -183,6 +183,7 @@ def run_unsloth_inference(model_key: str, items: list, args, system_prompt: str,
             "id": item["id"], "dominio": item["dominio"], "nivel_dificuldade": item["nivel_dificuldade"],
             "model": model_key, "pergunta": item["pergunta"],
             "resposta_referencia": item["resposta_referencia"],
+            "chunk_texto": item.get("chunk_texto", []),
             "resposta_gerada": resposta, "latency_s": round(latency, 2), "error": error,
         }
         out_f.write(json.dumps(row, ensure_ascii=False) + "\n")
@@ -230,6 +231,7 @@ def run_litellm_inference(model_name: str, items: list, args, system_prompt: str
             "id": item["id"], "dominio": item["dominio"], "nivel_dificuldade": item["nivel_dificuldade"],
             "model": model_name, "pergunta": item["pergunta"],
             "resposta_referencia": item["resposta_referencia"],
+            "chunk_texto": item.get("chunk_texto", []),
             "resposta_gerada": resposta, "latency_s": round(latency, 2), "error": error,
         }
         out_f.write(json.dumps(row, ensure_ascii=False) + "\n")
