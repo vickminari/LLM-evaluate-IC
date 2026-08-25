@@ -14,7 +14,7 @@ Consolida os resultados da avaliacao do GovBench-BR (09_metrics_out/) e gera:
      - 06_judge_agreement_breakdown.png: Matriz de Consenso e Concordancia dos Juizes
 
 USO:
-    python src/10_generate_plots_and_tables.py --metrics-dir 09_metrics_out --output-dir 10_reports_out
+    python src/10_generate_plots_and_tables.py --metrics-dir out/09_metrics_out --output-dir out/10_reports_out
 """
 
 import argparse
@@ -570,8 +570,8 @@ def generate_publication_plots(summary_by_model, summary_by_strata, stats, out_d
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--metrics-dir", default="./09_metrics_out", help="Diretorio onde estao summary_by_model.json e scored_items.jsonl")
-    parser.add_argument("--output-dir", default="./10_reports_out", help="Diretorio de saida para os relatorios, tabelas e graficos")
+    parser.add_argument("--metrics-dir", default="out/09_metrics_out", help="Diretorio onde estao summary_by_model.json e scored_items.jsonl")
+    parser.add_argument("--output-dir", default="out/10_reports_out", help="Diretorio de saida para os relatorios, tabelas e graficos")
     args = parser.parse_args()
 
     metrics_dir = Path(args.metrics_dir)

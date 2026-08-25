@@ -69,7 +69,7 @@ def group_sort_key(group: list) -> str:
     return hashlib.md5(",".join(ids).encode()).hexdigest()
 
 
-def split_govbench(input_filepath: str, train_ratio: float = 0.8, seed: int = 42, output_dir: str = "07_splits_out"):
+def split_govbench(input_filepath: str, train_ratio: float = 0.8, seed: int = 42, output_dir: str = "out/07_splits_out"):
     input_path = Path(input_filepath)
     out_dir = Path(output_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -157,8 +157,8 @@ def split_govbench(input_filepath: str, train_ratio: float = 0.8, seed: int = 42
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Divide o dataset GovBench-BR em treino/teste, estratificado e sem vazamento por chunk compartilhado.")
-    parser.add_argument("--input", default="05_cleaned_dataset_out/govbench_br.jsonl")
-    parser.add_argument("--output-dir", default="07_splits_out")
+    parser.add_argument("--input", default="out/05_cleaned_dataset_out/govbench_br.jsonl")
+    parser.add_argument("--output-dir", default="out/07_splits_out")
     parser.add_argument("--train-ratio", type=float, default=0.8)
     parser.add_argument("--seed", type=int, default=42)
     args = parser.parse_args()

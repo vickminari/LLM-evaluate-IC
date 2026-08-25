@@ -203,8 +203,8 @@ class MetricsLoggerCallback:
 def main():
     parser = argparse.ArgumentParser(description="Fine-Tuning do Qwen3.5-9B com Unsloth.")
     parser.add_argument("--model", default="unsloth/Qwen3.5-9B", help="Repo HF do modelo base")
-    parser.add_argument("--train-file", default="07_splits_out/govbench_br_validado_train.jsonl")
-    parser.add_argument("--output-dir", default="11_finetuning_out")
+    parser.add_argument("--train-file", default="out/07_splits_out/govbench_br_validado_train.jsonl")
+    parser.add_argument("--output-dir", default="out/11_finetuning_out")
     parser.add_argument("--format", choices=["rag", "closed_book", "both"], default="closed_book",
                          help="Formato dos exemplos de treino (default: both, dobra o dataset)")
     parser.add_argument("--val-fraction", type=float, default=0.1,

@@ -9,13 +9,13 @@ estrato (domínio x nível de dificuldade).
 JUÍZES RECOMENDADOS: Command-R7B + Phi-4 (os mesmos da curadoria do benchmark, script 06)
 
 USO:
-    python 09_compute_metrics.py --predictions 08_eval_out/predictions.jsonl \
-        --judges ollama/command-r7b,ollama/phi4:14b --output-dir 09_metrics_out
+    python 09_compute_metrics.py --predictions out/08_eval_out/predictions.jsonl \
+        --judges ollama/command-r7b,ollama/phi4:14b --output-dir out/09_metrics_out
 
 SAÍDAS:
-    09_metrics_out/scored_items.jsonl   -> cada predição + todas as métricas
-    09_metrics_out/summary_by_model.json         -> agregado por modelo
-    09_metrics_out/summary_by_model_strata.json  -> agregado por modelo x domínio x nível
+    out/09_metrics_out/scored_items.jsonl   -> cada predição + todas as métricas
+    out/09_metrics_out/summary_by_model.json         -> agregado por modelo
+    out/09_metrics_out/summary_by_model_strata.json  -> agregado por modelo x domínio x nível
 """
 
 import argparse
@@ -170,7 +170,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--predictions", required=True, help="predictions.jsonl do script 08")
     parser.add_argument("--judges", default="", help="modelos litellm separados por vírgula (vazio = pula LLM-judge)")
-    parser.add_argument("--output-dir", default="09_metrics_out")
+    parser.add_argument("--output-dir", default="out/09_metrics_out")
     parser.add_argument("--skip-bertscore", action="store_true", help="pula BERTScore (mais rápido p/ sanity check)")
     parser.add_argument("--overwrite", action="store_true", help="ignora scored_items.jsonl anterior e recalcula tudo do zero")
     parser.add_argument("--limit", type=int, default=None)

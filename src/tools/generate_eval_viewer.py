@@ -18,7 +18,9 @@ from pathlib import Path
 
 def build_eval_viewer():
     root_dir = Path(__file__).resolve().parent.parent.parent
-    metrics_dir = root_dir / "09_metrics_out"
+    metrics_dir = root_dir / "out" / "09_metrics_out"
+    if not metrics_dir.exists():
+        metrics_dir = root_dir / "09_metrics_out"
     scored_path = metrics_dir / "scored_items.jsonl"
     summary_path = metrics_dir / "summary_by_model.json"
     strata_path = metrics_dir / "summary_by_model_strata.json"

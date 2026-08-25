@@ -16,14 +16,10 @@ completo (govbench_br.jsonl, que tem o campo em todo item) e regrava um
 predictions.jsonl pronto para rejulgar com 10_compute_metrics.py.
 
 USO:
-    python patch_backfill_chunk_texto.py \
-        --scored scored_items.jsonl \
-        --full-dataset govbench_br.jsonl \
-        --output predictions_regrounded.jsonl
-
-    python .\src\patch_backfill_chunk_texto.py --scored .\08_eval_out\predictions.jsonl \
-    --full-dataset .\07_splits_out\govbench_br_validado_test.jsonl \
-    --output .\08_eval_out\predictions_regrounded.jsonl
+    python src/patch_backfill_chunk_texto.py \
+        --scored out/08_eval_out/predictions.jsonl \
+        --full-dataset out/07_splits_out/govbench_br_validado_test.jsonl \
+        --output out/08_eval_out/predictions_regrounded.jsonl
 """
 
 import argparse

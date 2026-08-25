@@ -28,10 +28,12 @@ from pathlib import Path
 
 def standardize():
     root_dir = Path(__file__).resolve().parent.parent.parent
-    clean_path = root_dir / "05_cleaned_dataset_out" / "govbench_br_raw_gemma4-31b_clean.jsonl"
-    map_path = root_dir / "05_cleaned_dataset_out" / "id_renumbering_map.json"
-    judge_path = root_dir / "06_llm_judge_out" / "govbench_judged.jsonl"
-    priority_path = root_dir / "06_llm_judge_out" / "priority_review.jsonl"
+    clean_path = root_dir / "out" / "05_cleaned_dataset_out" / "govbench_br_raw_gemma4-31b_clean.jsonl"
+    if not clean_path.exists():
+        clean_path = root_dir / "05_cleaned_dataset_out" / "govbench_br_raw_gemma4-31b_clean.jsonl"
+    map_path = root_dir / "out" / "05_cleaned_dataset_out" / "id_renumbering_map.json"
+    judge_path = root_dir / "out" / "06_llm_judge_out" / "govbench_judged.jsonl"
+    priority_path = root_dir / "out" / "06_llm_judge_out" / "priority_review.jsonl"
     
     if not clean_path.exists():
         print(f"Erro: Dataset higienizado não encontrado em {clean_path}")
@@ -106,7 +108,7 @@ def standardize():
 
     # 4. Re-executa o split estratificado (07_split_govbench.py)
     split_script = root_dir / "src" / "07_split_govbench.py"
-    splits_out_dir = root_dir / "07_splits_out"
+    splits_out_dir = root_dir / "out" / "07_splits_out"
     if split_script.exists():
         print("\nRe-executando split estratificado com os IDs padronizados...")
         cmd = [

@@ -72,7 +72,7 @@ def main():
     parser.add_argument("--tasks", required=True, help="generation_tasks.jsonl do script 01")
     parser.add_argument("--models", required=True, help="modelos litellm separados por vírgula, ex.: ollama/gemma4:31b,gemini/gemini-3.6-flash")
     parser.add_argument("--n", type=int, default=10, help="nº de tarefas a testar por modelo (amostra do topo do arquivo)")
-    parser.add_argument("--output-dir", default="./02_pilot_out")
+    parser.add_argument("--output-dir", default="out/02_pilot_out")
     parser.add_argument("--dry-run", action="store_true", help="só mostra os prompts, não chama nenhum modelo")
     args = parser.parse_args()
 

@@ -49,17 +49,17 @@ def main():
     parser = argparse.ArgumentParser(description="Gera visualizador HTML para priority_review.jsonl")
     parser.add_argument(
         "--priority-file",
-        default="06_llm_judge_out/priority_review.jsonl",
+        default="out/06_llm_judge_out/priority_review.jsonl",
         help="Caminho para priority_review.jsonl"
     )
     parser.add_argument(
         "--clean-file",
-        default="05_cleaned_dataset_out/govbench_br_raw_gemma4-31b_clean.jsonl",
+        default="out/05_cleaned_dataset_out/govbench_br_raw_gemma4-31b_clean.jsonl",
         help="Caminho para o dataset limpo com perguntas e trechos"
     )
     parser.add_argument(
         "--output-dir",
-        default="06_llm_judge_out",
+        default="out/06_llm_judge_out",
         help="Diretório de saída para salvar o HTML e o JSON formatado"
     )
     args = parser.parse_args()

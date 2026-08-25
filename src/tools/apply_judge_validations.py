@@ -35,8 +35,11 @@ def load_jsonl(path: Path) -> list:
 
 def main():
     root_dir = Path(__file__).resolve().parent.parent.parent
-    clean_path = root_dir / "05_cleaned_dataset_out" / "govbench_br.jsonl"
-    clean_alt = root_dir / "05_cleaned_dataset_out" / "govbench_br_raw_gemma4-31b_clean.jsonl"
+    clean_path = root_dir / "out" / "05_cleaned_dataset_out" / "govbench_br.jsonl"
+    clean_alt = root_dir / "out" / "05_cleaned_dataset_out" / "govbench_br_raw_gemma4-31b_clean.jsonl"
+    if not clean_path.exists() and not clean_alt.exists():
+        clean_path = root_dir / "05_cleaned_dataset_out" / "govbench_br.jsonl"
+        clean_alt = root_dir / "05_cleaned_dataset_out" / "govbench_br_raw_gemma4-31b_clean.jsonl"
 
     if not clean_path.exists() and clean_alt.exists():
         clean_path = clean_alt
@@ -49,7 +52,9 @@ def main():
     print(f"Dataset limpo carregado: {len(clean_items)} itens.")
 
     # 1. Carrega mapeamento do dataset bruto -> pergunta
-    raw_path = root_dir / "03_generation_out" / "govbench_br_raw_gemma4-31b.jsonl"
+    raw_path = root_dir / "out" / "03_generation_out" / "govbench_br_raw_gemma4-31b.jsonl"
+    if not raw_path.exists():
+        raw_path = root_dir / "03_generation_out" / "govbench_br_raw_gemma4-31b.jsonl"
     raw_map = {}
     if raw_path.exists():
         for r in load_jsonl(raw_path):
@@ -69,7 +74,9 @@ def main():
                 pergunta_to_verdicts[raw_map[j_id]] = verdicts
 
     # 3. Carrega vereditos da rodada recente
-    fresh_judge_path = root_dir / "06_llm_judge_out" / "govbench_judged.jsonl"
+    fresh_judge_path = root_dir / "out" / "06_llm_judge_out" / "govbench_judged.jsonl"
+    if not fresh_judge_path.exists():
+        fresh_judge_path = root_dir / "06_llm_judge_out" / "govbench_judged.jsonl"
     fresh_ids_map = {}
     if fresh_judge_path.exists():
         fresh_items = load_jsonl(fresh_judge_path)
@@ -137,7 +144,7 @@ def main():
     print(f"Itens com validação humana (jose_victor):   {human_approved_count} (100.0%)")
 
     # 5. Salva os arquivos de dataset validados
-    out_validated = root_dir / "05_cleaned_dataset_out" / "govbench_br_validado.jsonl"
+    out_validated = root_dir / "out" / "05_cleaned_dataset_out" / "govbench_br_validado.jsonl"
     with open(out_validated, "w", encoding="utf-8") as f:
         for item in updated_items:
             f.write(json.dumps(item, ensure_ascii=False) + "\n")
@@ -158,7 +165,7 @@ def main():
             "--input",
             str(out_validated),
             "--output-dir",
-            str(root_dir / "07_splits_out"),
+            str(root_dir / "out" / "07_splits_out"),
         ]
         subprocess.run(cmd, check=True)
 

@@ -48,16 +48,16 @@ def is_table_artifact(item: dict) -> tuple[bool, str]:
 
 def main():
     root_dir = Path(__file__).resolve().parent.parent
-    raw_path = root_dir / "03_generation_out" / "govbench_br_raw_gemma4-31b.jsonl"
-    rep_path = root_dir / "03_generation_out" / "govbench_br_replacement_gemma4-31b.jsonl"
-    clean_out_dir = root_dir / "05_cleaned_dataset_out"
+    raw_path = root_dir / "out" / "03_generation_out" / "govbench_br_raw_gemma4-31b.jsonl"
+    rep_path = root_dir / "out" / "03_generation_out" / "govbench_br_replacement_gemma4-31b.jsonl"
+    clean_out_dir = root_dir / "out" / "05_cleaned_dataset_out"
     clean_out_dir.mkdir(parents=True, exist_ok=True)
     clean_path = clean_out_dir / "govbench_br_raw_gemma4-31b_clean.jsonl"
     
-    flagged_path = root_dir / "04_quality_audit_out" / "flagged_items.jsonl"
-    near_dups_path = root_dir / "04_quality_audit_out" / "near_duplicate_pairs.json"
-    human_decisions_path = root_dir / "06_llm_judge_out" / "govbench_human_audit_decisions.json"
-    removed_log_path = root_dir / "04_quality_audit_out" / "removed_table_artifacts.jsonl"
+    flagged_path = root_dir / "out" / "04_quality_audit_out" / "flagged_items.jsonl"
+    near_dups_path = root_dir / "out" / "04_quality_audit_out" / "near_duplicate_pairs.json"
+    human_decisions_path = root_dir / "out" / "06_llm_judge_out" / "govbench_human_audit_decisions.json"
+    removed_log_path = root_dir / "out" / "04_quality_audit_out" / "removed_table_artifacts.jsonl"
     
     items = []
     if raw_path.exists():

@@ -53,9 +53,9 @@ def is_pure_content_chunk(c: dict) -> bool:
 
 def main():
     repo = Path(__file__).resolve().parent.parent
-    chunks_path = repo / "00_chunks_out" / "all_chunks.jsonl"
-    clean_path = repo / "05_cleaned_dataset_out" / "govbench_br_raw_gemma4-31b_clean.jsonl"
-    out_tasks_path = repo / "01_sampling_out" / "replacement_generation_tasks.jsonl"
+    chunks_path = repo / "out" / "00_chunks_out" / "all_chunks.jsonl"
+    clean_path = repo / "out" / "05_cleaned_dataset_out" / "govbench_br_raw_gemma4-31b_clean.jsonl"
+    out_tasks_path = repo / "out" / "01_sampling_out" / "replacement_generation_tasks.jsonl"
 
     with open(clean_path, 'r', encoding='utf-8') as f:
         used_items = [json.loads(line) for line in f if line.strip()]

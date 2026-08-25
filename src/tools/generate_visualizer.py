@@ -19,23 +19,27 @@ from pathlib import Path
 
 def build_visualizer():
     root_dir = Path(__file__).resolve().parent.parent.parent
-    clean_path = root_dir / "05_cleaned_dataset_out" / "govbench_br_validado.jsonl"
+    clean_path = root_dir / "out" / "05_cleaned_dataset_out" / "govbench_br_validado.jsonl"
+    if not clean_path.exists():
+        clean_path = root_dir / "out" / "05_cleaned_dataset_out" / "govbench_br.jsonl"
+    if not clean_path.exists():
+        clean_path = root_dir / "out" / "05_cleaned_dataset_out" / "govbench_br_raw_gemma4-31b_clean.jsonl"
+    if not clean_path.exists():
+        clean_path = root_dir / "05_cleaned_dataset_out" / "govbench_br_validado.jsonl"
     if not clean_path.exists():
         clean_path = root_dir / "05_cleaned_dataset_out" / "govbench_br.jsonl"
-    if not clean_path.exists():
-        clean_path = root_dir / "05_cleaned_dataset_out" / "govbench_br_raw_gemma4-31b_clean.jsonl"
 
-    train_path = root_dir / "07_splits_out" / "govbench_br_validado_train.jsonl"
+    train_path = root_dir / "out" / "07_splits_out" / "govbench_br_validado_train.jsonl"
     if not train_path.exists():
-        train_path = root_dir / "07_splits_out" / "govbench_br_train.jsonl"
+        train_path = root_dir / "out" / "07_splits_out" / "govbench_br_train.jsonl"
     if not train_path.exists():
-        train_path = root_dir / "07_splits_out" / "govbench_br_raw_gemma4-31b_clean_train.jsonl"
+        train_path = root_dir / "07_splits_out" / "govbench_br_validado_train.jsonl"
 
-    test_path = root_dir / "07_splits_out" / "govbench_br_validado_test.jsonl"
+    test_path = root_dir / "out" / "07_splits_out" / "govbench_br_validado_test.jsonl"
     if not test_path.exists():
-        test_path = root_dir / "07_splits_out" / "govbench_br_test.jsonl"
+        test_path = root_dir / "out" / "07_splits_out" / "govbench_br_test.jsonl"
     if not test_path.exists():
-        test_path = root_dir / "07_splits_out" / "govbench_br_raw_gemma4-31b_clean_test.jsonl"
+        test_path = root_dir / "07_splits_out" / "govbench_br_validado_test.jsonl"
 
     out_dir = Path(__file__).resolve().parent
     out_dir.mkdir(parents=True, exist_ok=True)

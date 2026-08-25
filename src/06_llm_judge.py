@@ -55,7 +55,7 @@ def main():
         default="ollama/command-r7b,ollama/phi4:14b",
         help="1+ modelos litellm separados por vírgula (padrão: ollama/command-r7b,ollama/phi4:14b)"
     )
-    parser.add_argument("--output-dir", default="./06_llm_judge_out")
+    parser.add_argument("--output-dir", default="out/06_llm_judge_out")
     parser.add_argument("--dominio", default=None)
     parser.add_argument("--nivel", default=None)
     parser.add_argument("--limit", type=int, default=None)

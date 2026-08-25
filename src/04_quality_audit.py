@@ -72,7 +72,7 @@ def sample_size(N: int, confidence: float, margin: float) -> int:
 def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--input", required=True)
-    parser.add_argument("--output-dir", default="./04_quality_audit_out")
+    parser.add_argument("--output-dir", default="out/04_quality_audit_out")
     parser.add_argument("--confidence", type=float, default=0.90, help="0.90, 0.95 ou 0.99")
     parser.add_argument("--margin", type=float, default=0.10, help="margem de erro, ex.: 0.10 = 10 p.p.")
     parser.add_argument("--seed", type=int, default=42)

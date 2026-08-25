@@ -250,7 +250,7 @@ def build_tfidf_groups(pool: list, n_target_groups: int, rng: random.Random) -> 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--input", required=True, help="Caminho para all_chunks.jsonl")
-    parser.add_argument("--output-dir", default="./01_sampling_out", help="Diretório de saída")
+    parser.add_argument("--output-dir", default="out/01_sampling_out", help="Diretório de saída")
     parser.add_argument("--seed", type=int, default=SEED)
     args = parser.parse_args()
 

@@ -24,21 +24,21 @@ comparação justa entre execuções.
 
 USO:
     # baselines via Ollama, várias de uma vez
-    python src/08_evaluate_llms.py --test-file 07_splits_out/govbench_br_validado_test.jsonl \
+    python src/08_evaluate_llms.py --test-file out/07_splits_out/govbench_br_validado_test.jsonl \
         --models ollama/llama3.1:8b,ollama/deepseek-r1:8b,ollama/mistral-nemo:12b \
-        --output-dir 08_eval_out
+        --output-dir out/08_eval_out
 
     # Qwen3.5 base (execução separada)
-    python src/08_evaluate_llms.py --test-file 07_splits_out/govbench_br_validado_test.jsonl \
-        --models qwen_base --base-model unsloth/Qwen3.5-9B --output-dir 08_eval_out
+    python src/08_evaluate_llms.py --test-file out/07_splits_out/govbench_br_validado_test.jsonl \
+        --models qwen_base --base-model unsloth/Qwen3.5-9B --output-dir out/08_eval_out
 
     # Qwen3.5 fine-tunado (execução separada)
-    python src/08_evaluate_llms.py --test-file 07_splits_out/govbench_br_validado_test.jsonl \
+    python src/08_evaluate_llms.py --test-file out/07_splits_out/govbench_br_validado_test.jsonl \
         --models qwen_finetuned --base-model unsloth/Qwen3.5-9B \
-        --lora-adapter 11_finetuning_out/qwen_govbench_lora --output-dir 08_eval_out
+        --lora-adapter out/11_finetuning_out/qwen_govbench_lora --output-dir out/08_eval_out
 
 SAÍDA (acumulativa/retomável -- todas as execuções escrevem no mesmo arquivo):
-    08_eval_out/predictions.jsonl
+    out/08_eval_out/predictions.jsonl
 """
 
 import argparse
@@ -251,7 +251,7 @@ def main():
                          help="'qwen_base' / 'qwen_finetuned' (só 1 por execução) OU lista litellm separada por vírgula")
     parser.add_argument("--base-model", default="unsloth/Qwen3.5-9B")
     parser.add_argument("--lora-adapter", default=None, help="obrigatório para --models qwen_finetuned")
-    parser.add_argument("--output-dir", default="08_eval_out")
+    parser.add_argument("--output-dir", default="out/08_eval_out")
     parser.add_argument("--max-seq-len", type=int, default=1024)
     parser.add_argument("--max-new-tokens", type=int, default=1700)
     parser.add_argument("--max-retries", type=int, default=2)
