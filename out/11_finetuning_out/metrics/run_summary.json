@@ -1,0 +1,22 @@
+{
+  "n_log_points": 60,
+  "final_train_loss": 0.8210046768188477,
+  "final_eval_loss": 0.9286510944366455,
+  "min_train_loss": 0.7624596118927002,
+  "min_eval_loss": 0.9270253777503967,
+  "model": "unsloth/Qwen3.5-9B",
+  "format": "closed_book",
+  "epochs": 3,
+  "lr": 0.0002,
+  "lora_r": 8,
+  "max_seq_len": 1024,
+  "batch_size": 1,
+  "grad_accum": 8,
+  "effective_batch_size": 8,
+  "n_train_examples": 607,
+  "n_eval_examples": 68,
+  "train_runtime_s": 14287.8793,
+  "best_model_checkpoint": "11_finetuning_out/checkpoints/checkpoint-152",
+  "best_eval_loss": 0.9270253777503967,
+  "quantization": "4-bit QLoRA (bf16 recomendado pelo Unsloth para Qwen3.5 não coube em 8GB VRAM -- ver aviso no início do log)"
+}
