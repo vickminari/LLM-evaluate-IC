@@ -8,6 +8,7 @@
 [![Fine-Tuning](https://img.shields.io/badge/Fine--Tuning-QLoRA%20Qwen%203.5%209B-success.svg)](#-6-fine-tuning-lora--qlora-no-qwen-35-9b-out11_finetuning_out)
 [![Predictions](https://img.shields.io/badge/Avaliação-840%20Predições%20(Closed--Book)-orange.svg)](#-7-avaliação-experimental-closed-book-e-placar-geral)
 [![Status](https://img.shields.io/badge/Status-100%25%20Concluído-brightgreen.svg)](#-1-apresentação-institucional)
+[![Dashboard ao Vivo](https://img.shields.io/badge/Dashboard-Ver%20Demo-blue.svg)](https://vickminari.github.io/LLM-evaluate-IC/)
 
 </div>
 
@@ -128,6 +129,8 @@ flowchart TD
 ---
 
 ## 📊 5. Distribuição Estratificada do GovBench-BR (843 itens)
+
+📥 **Download:** [`govbench_br.jsonl`](out/05_cleaned_dataset_out/govbench_br.jsonl) (843 itens, formato JSONL)
 
 O benchmark final é composto por **843 itens de alta qualidade**, rigorosamente balanceados entre 12 estratos (`4 domínios × 3 níveis de complexidade cognitiva`):
 
@@ -277,9 +280,13 @@ Todas as figuras foram produzidas em resolução de publicação acadêmica (300
 
 ## 💻 11. Visualizadores Web e Meta-Auditoria Humana (`src/tools/`)
 
-Para assegurar auditabilidade qualitativa e cumprir as diretrizes da **Fase de Integração (FI)** do plano de trabalho de IC, o repositório disponibiliza ferramentas web *standalone* em Vanilla JS/CSS (sem dependências externas de servidor):
+Para assegurar auditabilidade qualitativa e cumprir as diretrizes da **Fase de Integração (FI)** do plano de trabalho de IC, o repositório disponibiliza ferramentas web *standalone* em Vanilla JS/CSS (sem dependências externas de servidor).
 
-### 11.1 Dashboard de Avaliação & Meta-Auditoria (`src/tools/eval_metrics_viewer.html`)
+> 🔗 **[Acessar o Dashboard ao Vivo](https://vickminari.github.io/LLM-evaluate-IC/)** — não requer instalação, abre direto no navegador.
+
+### 11.1 Dashboard de Avaliação & Meta-Auditoria (`docs/index.html` / `src/tools/eval_metrics_viewer.html`)
+* **Hospedagem Web:** Publicado via GitHub Pages em `docs/index.html` (demo ao vivo sem instalação);
+* **Geração Local:** Compilado e atualizado via `python src/tools/generate_eval_viewer.py`;
 * **Painel "Sobre este protótipo":** Banner contextualizador conectando explicitamente a ferramenta ao Relatório Final do GovBench-BR e ao plano de trabalho PIBIC/ICV;
 * **Scorecard Interativo:** KPIs completos, filtros multidimensionais por modelo, domínio, nível e padrão de consenso de juízes;
 * **Comparador Head-to-Head:** Inspeção lado a lado de qualquer uma das 168 perguntas, confrontando gabarito oficial e as 5 predições simultâneas;
@@ -295,7 +302,7 @@ Para assegurar auditabilidade qualitativa e cumprir as diretrizes da **Fase de I
 ### 12.1 Clonagem e Dependências
 ```bash
 # Clone o repositório
-git clone https://github.com/usuario/LLM-evaluate-IC.git
+git clone https://github.com/vickminari/LLM-evaluate-IC.git
 cd LLM-evaluate-IC
 
 # Crie e ative o ambiente virtual
@@ -371,3 +378,18 @@ python src/tools/generate_eval_viewer.py
 2. **Superioridade do BERTScore com BERTimbau:** Métricas puramente baseadas em n-gramas (ROUGE/F1) penalizam severamente paráfrases jurídicas legítimas. O BERTScore contextualizado em língua portuguesa mostrou-se essencial para capturar equivalências semânticas ricas;
 3. **Limitações do Regime Closed-Book e Risco de Alucinação:** Mesmo com a nítida superioridade do modelo ajustado, a taxa de alucinação factual de entidades específicas (nomes de sistemas, dosagens, órgãos recursais) permaneceu elevada (~88%). **Conclusão:** LLMs locais não devem atuar de forma 100% autônoma em decisões de governo sem arquiteturas de recuperação ancorada (**RAG**) ou auditoria humana permanente;
 4. **Alerta Metodológico sobre Juízes Sintéticos:** A avaliação empírica comprovou que juízes LLM são suscetíveis a severo viés de verbosidade. O uso de *LLM-as-a-Judge* exige validação cruzada, ancoragem estrita no trecho-fonte original e recalibração empírica contínua.
+
+## 📖 14. Como Citar
+
+Se este trabalho for útil para sua pesquisa, cite:
+
+```bibtex
+@techreport{oliveira2026govbenchbr,
+  author      = {Oliveira, José Victor Vieira de},
+  title       = {Uma Avaliação dos Grandes Modelos de Linguagens Locais com Fine-Tuning, Soberana Geral e Soberana Específica},
+  institution = {Universidade Federal do Piauí},
+  type        = {Relatório de Iniciação Científica (PIBIC)},
+  year        = {2026},
+  note        = {Orientador: Raimundo Santos Moura}
+}
+```
