@@ -189,6 +189,123 @@
             flex: 1;
         }
 
+        /* --- PROTOTYPE BANNER ("SOBRE ESTE PROTÓTIPO") --- */
+        .prototype-banner {
+            background: linear-gradient(135deg, rgba(23, 32, 54, 0.92) 0%, rgba(17, 24, 39, 0.95) 100%);
+            border: 1px solid rgba(59, 130, 246, 0.35);
+            border-left: 4px solid #3b82f6;
+            border-radius: 12px;
+            padding: 1.1rem 1.4rem;
+            margin-bottom: 1.75rem;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.3);
+            transition: all 0.2s ease;
+        }
+
+        .prototype-banner-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .prototype-banner-title {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .prototype-banner-title h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #f3f4f6;
+            letter-spacing: -0.01em;
+        }
+
+        .proto-icon {
+            font-size: 1.15rem;
+        }
+
+        .proto-tag {
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 0.2rem 0.55rem;
+            border-radius: 6px;
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+
+        .proto-toggle-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            border-radius: 6px;
+            padding: 0.25rem 0.6rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            transition: all 0.2s ease;
+        }
+
+        .proto-toggle-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text-main);
+            border-color: #3b82f6;
+        }
+
+        .prototype-banner-body {
+            margin-top: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .prototype-banner-text {
+            font-size: 0.88rem;
+            color: #d1d5db;
+            line-height: 1.6;
+        }
+
+        .prototype-banner-text strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .prototype-banner-text em {
+            color: #cbd5e1;
+            font-style: italic;
+        }
+
+        .prototype-banner-footer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding-top: 0.25rem;
+        }
+
+        .proto-chip {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid var(--border-color);
+            padding: 0.25rem 0.6rem;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+        }
+
+        .proto-chip strong {
+            color: #e2e8f0;
+        }
+
         /* --- SUMMARY KPIS SECTION --- */
         .section-header-title {
             font-size: 1.1rem;
@@ -921,6 +1038,32 @@
     </header>
 
     <main>
+        <!-- SOBRE ESTE PROTÓTIPO (ENTREGÁVEL DO PLANO DE TRABALHO) -->
+        <section class="prototype-banner" id="prototype-banner">
+            <div class="prototype-banner-header">
+                <div class="prototype-banner-title">
+                    <span class="proto-icon">📌</span>
+                    <h3>Sobre este protótipo • Entregável da Fase de Integração</h3>
+                    <span class="proto-tag">Plano de Trabalho PIBIC/ICV • GovBench-BR</span>
+                </div>
+                <button class="proto-toggle-btn" id="proto-toggle-btn" onclick="toggleProtoBanner()" title="Minimizar / Expandir painel">
+                    <span id="proto-toggle-text">Ocultar</span>
+                    <span id="proto-toggle-icon">▲</span>
+                </button>
+            </div>
+            <div class="prototype-banner-body" id="proto-banner-body">
+                <p class="prototype-banner-text">
+                    Este painel constitui o artefato entregável da <strong>Fase de Integração</strong> do plano de trabalho de Iniciação Científica (<em>"Investigação de Modelos de IA e Grandes Modelos de Linguagem para Auxiliar nas Demandas Governamentais"</em>), diretamente vinculado ao <strong>Relatório Final do GovBench-BR</strong>. A ferramenta viabiliza a inspeção qualitativa item a item das <strong>840 predições</strong> avaliadas no relatório (168 perguntas de teste submetidas a 5 modelos sob inferência <em>closed-book</em>), confrontando métricas automatizadas (ROUGE-L, Token-F1, BERTScore) com os pareceres do comitê duplo de juízes sintéticos (Command-R7B e Phi-4). Além da visualização comparativa direta (<em>Head-to-Head</em>), o protótipo viabiliza a <strong>meta-auditoria humana</strong> com persistência local e exportação JSON para validação da acurácia dos próprios juízes.
+                </p>
+                <div class="prototype-banner-footer">
+                    <span class="proto-chip">📄 <strong>Vínculo:</strong> Relatório Final (Seção 11)</span>
+                    <span class="proto-chip">🎯 <strong>Corpus:</strong> 840 predições (168 itens de teste × 5 modelos)</span>
+                    <span class="proto-chip">⚖️ <strong>Juízes Sintéticos:</strong> Command-R7B + Phi-4 (14B)</span>
+                    <span class="proto-chip">🔬 <strong>Fine-Tuning:</strong> Qwen 3.5 9B (QLoRA)</span>
+                </div>
+            </div>
+        </section>
+
         <!-- SECTION TITLE -->
         <div class="section-header-title">
             <span>🏆 Ranking Comparativo e Estatísticas de Consenso dos Juízes</span>
@@ -1609,6 +1752,23 @@
                 .replace(/>/g, "&gt;")
                 .replace(/"/g, "&quot;")
                 .replace(/'/g, "&#039;");
+        }
+
+        function toggleProtoBanner() {
+            const body = document.getElementById('proto-banner-body');
+            const text = document.getElementById('proto-toggle-text');
+            const icon = document.getElementById('proto-toggle-icon');
+            if (!body) return;
+            const isHidden = body.style.display === 'none';
+            if (isHidden) {
+                body.style.display = '';
+                if (text) text.innerText = 'Ocultar';
+                if (icon) icon.innerText = '▲';
+            } else {
+                body.style.display = 'none';
+                if (text) text.innerText = 'Expandir';
+                if (icon) icon.innerText = '▼';
+            }
         }
 
         window.onload = init;
