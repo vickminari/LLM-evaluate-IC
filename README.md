@@ -393,3 +393,7 @@ Se este trabalho for útil para sua pesquisa, cite:
   note        = {Orientador: Raimundo Santos Moura}
 }
 ```
+
+## 📄 Licença
+
+Este projeto está sob a licença MIT. Consulte o arquivo [LICENSE](LICENSE) para obter mais detalhes.
